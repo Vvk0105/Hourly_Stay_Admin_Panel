@@ -1,39 +1,20 @@
 import { useState } from "react";
-import api from "../api/axios";
-import {jwtDecode} from "jwt-decode";
-import { useDispatch } from "react-redux";
-import { setUser } from "../store/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const { loading, error } = useSelector((state) => state.auth);
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleLogin = async ()=>{
-        const res = await api.post("users/auth/login/", {
-            email,
-            password
-        })
+        const res = await dispatch(loginUser({ email, password })).unwrap()
 
-        const { access, refresh } = res.data
-
-        localStorage.setItem("access", access)
-        localStorage.setItem("refresh", refresh)
-
-        const decode = jwtDecode(access)
-
-        const profileRes = await api.get("users/profile/")
-
-        dispatch(setUser({
-            id: decode.user_id,
-            role: decode.role,
-            permissions: decode.permissions,
-            name: profileRes.data.full_name,
-        }))
-        
         navigate("/dashboard")
     }
     

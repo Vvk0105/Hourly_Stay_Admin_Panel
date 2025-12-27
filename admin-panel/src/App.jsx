@@ -3,16 +3,21 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { initAuth } from "./utils/initAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { checkAuth } from "./store/authSlice";
 
 function App() {
   const dispatch = useDispatch();
+  const { initialized } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    initAuth(dispatch);
-  }, []);
-  
+    dispatch(checkAuth());
+  }, [dispatch]);
+
+  if (!initialized) {
+      return <div>Loading application...</div>;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
