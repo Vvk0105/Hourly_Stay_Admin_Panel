@@ -5,6 +5,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "./store/authSlice";
+import MainLayout from "./layouts/MainLayout";
+import "./styles/layout.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +25,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route 
+          path="/dashboard" 
+          element={
+            <MainLayout>
+              <Dashboard />
+            </MainLayout>
+          } />
         </Route>
       </Routes>
     </BrowserRouter>
