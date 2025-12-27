@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkAuth } from "./store/authSlice";
 import MainLayout from "./layouts/MainLayout";
 import "./styles/layout.css";
+import UserManagement from "./pages/users/UserManagement";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,14 @@ function App() {
             </MainLayout>
           } />
         </Route>
+        <Route
+          path="/users"
+          element={
+            <MainLayout>
+              <UserManagement />
+            </MainLayout>
+          }
+        />
       </Routes>
     </BrowserRouter>
   )
