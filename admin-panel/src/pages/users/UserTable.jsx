@@ -37,13 +37,13 @@ function UserTable({ data, loading, pagination, onChange }) {
 
   return (
     <Table
-      rowKey="id"
+      rowKey="uuid"
       columns={columns}
       dataSource={data}
       loading={loading}
       pagination={{
         ...pagination,
-        position: ["bottomCenter"],
+        placement: ["bottomCenter"],
     }}
       onChange={onChange}
     />
