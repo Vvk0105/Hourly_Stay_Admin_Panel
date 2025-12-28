@@ -2,7 +2,7 @@ import { Table, Space, Button } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import RoleTag from "../../components/common/RoleTag";
 
-function UserTable({ data, loading, pagination, onChange, onDelete }) {  
+function UserTable({ data, loading, pagination, onChange, onDelete, onEdit }) {  
   const columns = [
     {
       title: "Name",
@@ -30,7 +30,11 @@ function UserTable({ data, loading, pagination, onChange, onDelete }) {
       title: "Action",
       render: (_, record) => (
         <Space>
-          <Button type="text" icon={<EditOutlined />} />
+          <Button 
+          type="text" 
+          icon={<EditOutlined />} 
+          onClick={() => onEdit(record.uuid)}
+          />
           <Button type="text" 
           danger 
           icon={<DeleteOutlined />}
