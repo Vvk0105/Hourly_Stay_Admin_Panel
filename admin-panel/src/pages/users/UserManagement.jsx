@@ -3,7 +3,7 @@ import PageHeader from "../../components/common/PageHeader";
 import UserFilters from "./UserFilters";
 import UserTable from "./UserTable";
 import api from "../../api/axios";
-import { Button } from "antd";
+import { Button, notification, Modal } from "antd";
 import AddUserModal  from "./AddUserModal"
 
 function UserManagement() {
@@ -17,7 +17,8 @@ function UserManagement() {
         pageSize: 5,
         total: 0,
     });
-
+    console.log('test pagination',pagination);
+    
     const fetchUsers = async (page = 1) => {
         setLoading(true);
 
@@ -29,8 +30,11 @@ function UserManagement() {
             search,
         },
         });
+        const activeUsers = res.data.results.filter(
+          (user) => user.status === "ACTIVE"
+        );
 
-        setUsers(res.data.results);
+        setUsers(activeUsers);
         setPagination({
         ...pagination,
         current: page,
@@ -39,6 +43,36 @@ function UserManagement() {
 
         setLoading(false);
     };
+
+    const handleDelete = (userId) => {
+      Modal.confirm({
+        title: "Delete User",
+        content: "Are you sure you want to delete this user?",
+        okText: "Yes Delete",
+        okType: "danger",
+        cancelText: "Cancel",
+
+        async onOk(){
+          try {
+            const res = await api.delete(`users/users/${userId}/`)
+            
+            notification.success({
+              message: "User deleted successfully",
+              description: res.data.message || "User deleted successfully",
+            })
+
+            fetchUsers(pagination.current)
+          } catch (error) {
+            notification.error({
+              message: "Delete Failed",
+              description:
+                error.response?.data?.error ||
+                "Unable to delete user",
+            });
+          }
+        }
+      })
+    }
 
     useEffect(() => {
         fetchUsers(1);
@@ -78,6 +112,7 @@ function UserManagement() {
         loading={loading}
         pagination={pagination}
         onChange={(pagination) => fetchUsers(pagination.current)}
+        onDelete={handleDelete}
       />
 
       {openRole && (
