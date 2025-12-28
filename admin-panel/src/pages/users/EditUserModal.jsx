@@ -71,14 +71,14 @@ function EditUserModal({ userId, open, onClose }) {
 
         {isSuperAdmin && (
           <>
-            {/* <Form.Item label="Role" name="role">
+            <Form.Item label="Role" name="role">
               <Select>
                 <Select.Option value="GROUP_ADMIN">Group Admin</Select.Option>
                 <Select.Option value="HOTEL_MANAGER">Hotel Manager</Select.Option>
                 <Select.Option value="HOTEL_STAFF">Hotel Staff</Select.Option>
                 <Select.Option value="SUPPORT">Support</Select.Option>
               </Select>
-            </Form.Item> */}
+            </Form.Item>
 
             <Form.Item label="Status" name="status">
               <Select>

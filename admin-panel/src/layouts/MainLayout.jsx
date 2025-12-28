@@ -6,7 +6,7 @@ const { Content } = Layout;
 
 function MainLayout({ children }) {
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "90vh" }}>
       <Sidebar />
       <Layout>
         <HeaderBar />

@@ -16,7 +16,7 @@ function UserManagement() {
   const [search, setSearch] = useState("");
   const [pagination, setPagination] = useState({
       current: 1,
-      pageSize: 5,
+      pageSize: 4,
       total: 0,
   });
   
@@ -29,6 +29,7 @@ function UserManagement() {
           page_size: pagination.pageSize,
           role: role !== "All" ? role : undefined,
           search,
+          exclude_roles: "SUPER_ADMIN"
       },
       });
       const activeUsers = res.data.results.filter(

@@ -9,6 +9,8 @@ import MainLayout from "./layouts/MainLayout";
 import "./styles/layout.css";
 import UserManagement from "./pages/users/UserManagement";
 import AssignChangePage from "./pages/assignChange/AssignChangePage";
+import HotelManagement from "./pages/hotels/HotelManagement";
+import AddHotel from "./pages/hotels/AddHotel";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,6 +53,18 @@ function App() {
             </MainLayout>
           }
         />
+        <Route
+          path="/hotels"
+          element={
+            <MainLayout>
+              <HotelManagement />
+            </MainLayout>
+          }
+        />
+        <Route path="/hotels/add" element={<MainLayout><AddHotel /></MainLayout>} />
+        {/* <Route path="/hotels/:id" element={<MainLayout><HotelDetails /></MainLayout>} /> */}
+        {/* <Route path="/hotels/:id/add-room" element={<MainLayout><AddRoom /></MainLayout>} />
+        <Route path="/hotels/:id/rooms/:roomId" element={<MainLayout><RoomDetails /></MainLayout>} /> */}
       </Routes>
     </BrowserRouter>
   )
