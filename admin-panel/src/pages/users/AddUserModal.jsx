@@ -35,10 +35,12 @@ function AddUserModal({ open, onClose, role }) {
         phone_number: values.phone,
       };
 
-      if (role !== "SUPPORT") {
-        payload.hotel_ids =
-          role === "GROUP_ADMIN" ? values.hotels : [values.hotels];
+      if (role === "GROUP_ADMIN") {
+        payload.hotel_ids = values.hotels; 
+      } else if (role !== "SUPPORT") {
+        payload.hotel_id = values.hotels;
       }
+
 
       await api.post(CREATE_USER_API_MAP[role], payload);
 

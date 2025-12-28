@@ -2,7 +2,7 @@ import { Table, Space, Button } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import RoleTag from "../../components/common/RoleTag";
 
-function UserTable({ data, loading, pagination, onChange }) {
+function UserTable({ data, loading, pagination, onChange }) {  
   const columns = [
     {
       title: "Name",
@@ -18,7 +18,9 @@ function UserTable({ data, loading, pagination, onChange }) {
     },
     {
       title: "Hotels",
-      render: (_, record) => record.hotels.join(", "),
+      render: (_, record) => 
+        record.hotels && record.hotels.length
+        ? record.hotels.map(h => h.name).join(", ") : ""
     },
     {
       title: "Roles",

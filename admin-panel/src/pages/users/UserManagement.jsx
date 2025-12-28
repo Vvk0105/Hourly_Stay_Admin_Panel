@@ -14,7 +14,7 @@ function UserManagement() {
     const [search, setSearch] = useState("");
     const [pagination, setPagination] = useState({
         current: 1,
-        pageSize: 10,
+        pageSize: 5,
         total: 0,
     });
 
