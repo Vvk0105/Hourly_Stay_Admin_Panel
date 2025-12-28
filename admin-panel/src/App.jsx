@@ -8,6 +8,7 @@ import { checkAuth } from "./store/authSlice";
 import MainLayout from "./layouts/MainLayout";
 import "./styles/layout.css";
 import UserManagement from "./pages/users/UserManagement";
+import AssignChangePage from "./pages/assignChange/AssignChangePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,14 @@ function App() {
           element={
             <MainLayout>
               <UserManagement />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/assignandchange"
+          element={
+            <MainLayout>
+              <AssignChangePage />
             </MainLayout>
           }
         />

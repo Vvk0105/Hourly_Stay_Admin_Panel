@@ -37,6 +37,13 @@ function Sidebar() {
         onClick: () => navigate("/users"),
         },
 
+        user?.role === "SUPER_ADMIN" && {
+          key: "/assignandchange",
+          icon: <UserOutlined />,
+          label: "Assign and Change",
+          onClick: () => navigate("/assignandchange"),
+        },
+        
         {
         key: "/hotels",
         icon: <HomeOutlined />,
